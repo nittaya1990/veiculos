@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<h:outputStylesheet library="css" name="estilo.css" />
+		<title>Cadastro Geral</title>
+	</h:head>
+	<h:body >
+		<table class="tabela">
+			<tr>
+				<td width ="5%"><h:graphicImage library="imagens" name="ifgoiano.png" width="70"/> </td>
+				<td><p:outputLabel style="fontt-size:20px" value="Cadastro de Pessoas"/></td>
+				<td align="right">
+					<h:outputLink value="Login.xhtml">
+						<h:graphicImage  library="imagens" name="sair.jpg" width="40"/>
+					</h:outputLink>
+				</td>
+			</tr>
+		</table>
+		<p:growl life="3000">
+			<p:autoUpdate/>
+		</p:growl>
+		
+		<p:confirmDialog global="true">
+			<p:commandButton immediate="true" value="Sim" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+			<p:commandButton immediate="true" value="Não" styleClass="ui-confirmdialog-no" icon="ui-icon-check"/>
+		</p:confirmDialog>
+		 
+		
+		
+		
+		<h:form id="formulario">
+			<p:tabView activeIndex="0" >
+				<p:tab title="Cadastro" >
+					<p:panel header="Dados Pessoais" id="painel">
+						<p:focus context="painel" for="fabricante"/>
+						<h:panelGrid columns="2" columnClasses="alinharEsquerda, alinharDireita">
+							<p:outputLabel value=""/>
+							<p:outputLabel value=""/>
+							
+							<p:outputLabel  for="fabricante" value="Fabricante: "/>
+							<p:inputText
+								id="fabricante"
+								value="#{veiculoMB.veiculo.fabricante}"
+								size="50"
+								placeholder="Digite o fabricante aqui"
+								required="true"
+								requiredMessage="Informe o fabricante!"
+							/>
+							<p:outputLabel for="modelo" value="Modelo: "/>
+							<p:inputText
+								id="modelo"
+								value="#{veiculoMB.veiculo.modelo}"
+								size="50"
+								placeholder="Digite o Modelo aqui"
+								required="true"
+								requiredMessage="Digite o modelo!"
+							/>
+							
+							<p:outputLabel for="anoFabricacao" value="Ano Fabricação: "/>
+							<p:inputMask 
+								maxlength="4"
+								id="anoFabricacao" 
+								required="true" 
+								placeholder="Ano de Fabricação"
+								requiredMessage="Digite o ano de Fabricação!"
+								value="#{veiculoMB.veiculo.anoFabricacao}"
+							/>
+							
+							<p:outputLabel for="anoModelo" value="Ano Modelo: "/>
+							<p:inputMask 
+								maxlength="4"
+								id="anoModelo" 
+								required="true" 
+								placeholder="Ano do Modelo"
+								requiredMessage="Digite o ano do Modelo!"
+								value="#{veiculoMB.veiculo.anoModelo}"
+							/>
+							
+							<p:outputLabel for="valor" value="Valor: "/>
+							<p:inputNumber 
+								id="valor" 
+								value="#{veiculoMB.valor}"
+								required="true"
+								requiredMessage="Digite o valor"
+								size="20"
+							/>
+							<p:outputLabel for="descricao" value="Descrição: "/>
+							<p:inputTextarea
+								id="descricao"
+								value="#{veiculoMB.veiculo.descricao}"
+								cols="50"
+								rows="5"
+								maxlength="200"
+								required="true"
+								requiredMessage="Digite a observação!"
+								counter="digitos"
+								counterTemplate="{0} caracteres restantes"
+							/>
+							
+							<p:outputLabel value="" />
+							<p:outputLabel id="digitos"/>
+												
+							
+						</h:panelGrid>
+					</p:panel>
+					<br/>
+					<p:spacer width="500" height="20" />
+					
+					<!-- Update: campo utilizado pelo ajax para atualizar a página(id,campoASerAtualizado) -->
+					
+					<p:commandButton 
+						value="Salvar"
+						actionListener="#{veiculoMB.salvar}"
+						title="Clique para adicionar na lista"
+						update="formulario tabela" 
+						icon="ui-icon-disk"
+					> 
+						<p:confirm header="Confirmação" message="Tem certeza que deseja adicionar?"/> 
+					</p:commandButton>
+					
+					<p:commandButton
+						value="Editar"
+						action="#{veiculoMB.alterar}"
+						update="formulario tabela"
+						icon="ui-icon-pencil"/>
+						
+					
+					<p:commandButton
+						actionListener="#{veiculoMB.limpar}"
+						value="Limpar"
+						immediate="true"
+						update="formulario tabela"	
+						onclick="reset()"
+					/>
+					
+					<div style="text-align: right;" >
+						<h:commandLink immediate="true">
+							<p:graphicImage 
+								title="Gerar XLS"
+								library="imagens"
+								name="xls.png"
+								width="3%"
+								height="3%"
+							/>
+							<p:dataExporter type="xls" target="tabela" fileName="RelatorioXLS"/>
+						</h:commandLink>	
+						
+						<h:commandLink immediate="true">
+							<p:graphicImage					
+								title="Gerar PDF"
+								library="imagens"
+								name="pdf.png"
+								width="3%"
+								height="3%"
+							/>
+							<p:dataExporter type="pdf" target="tabela" fileName="RelatorioPDF"/>
+						</h:commandLink>
+					</div>
+					
+					<p:dataTable
+						id="tabela"
+						value="#{veiculoMB.listaVeiculo}"
+						var="v"
+						border="1"
+						emptyMessage="Nenhum item na lista."
+					>
+						<p:column  headerText="Fabricante" style="text-align: center">
+							<p:outputLabel value="#{v.fabricante}"/>
+						</p:column>
+						
+						<p:column sortBy="#{v.modelo}" filterBy="#{v.modelo}" headerText="Modelo">
+							<p:outputLabel value="#{v.modelo}"/>
+						</p:column>
+						
+						<p:column  headerText="Ano Fabricação" style="text-align: center">
+							<p:outputLabel value="#{v.anoFabricacao}"/>
+						</p:column>
+						
+						<p:column  headerText="Ano Modelo" style="text-align: center">
+							<p:outputLabel value="#{v.anoModelo}"/>
+						</p:column>
+						
+						<p:column  headerText="Descrição">
+							<p:outputLabel value="#{v.descricao}"/>
+						</p:column>
+										 
+						<p:column headerText="Valor" style="text-align:right" width="60">
+							<h:outputText value="#{v.valor}" >
+								<f:convertNumber minFractionDigits="2"/>
+							</h:outputText>
+						</p:column>
+					
+						<p:column headerText="Editar" exportable="false" width="40">
+							<p:commandButton
+								icon="ui-icon-pencil" 
+								title="Editar"
+								action="#{veiculoMB.prepararEdicao}"
+								immediate="true"
+								update="formulario"
+							>
+								<f:param name="parametroId" value="#{v.id}" />
+							</p:commandButton>
+							
+						</p:column>
+						
+						<p:column headerText="Excluir" exportable="false" width="40">
+							<p:commandButton
+								icon="ui-icon-trash" 
+								title="Excluir"
+								action="#{veiculoMB.excluir}"
+								immediate="true"
+								update="tabela"
+							>
+								<f:param name="parametroIdent" value="#{v.id}" />
+								
+							</p:commandButton>
+						</p:column>
+						
+					</p:dataTable>
+					
+				</p:tab>
+				
+				<p:tab title="Gráfico">
+					<p:chart type="line" model="#{GraficoAreaMB.areaModel}" style="height:300px" />
+				</p:tab> 
+			</p:tabView>
+		</h:form>
+		
+	</h:body>
+</html>

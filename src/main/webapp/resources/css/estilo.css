@@ -1,0 +1,81 @@
+
+h1{
+	font-size: 24px;
+	font-weight: 450;
+	color: #3b4d64 !important;
+}
+
+.alinharDireita{
+	text-align: right;
+}
+
+.alinharEsquerda{
+	text-align: left;
+}
+
+.alinhasCentro{
+	text-align: center;
+}
+
+.alinharRetornar{
+	margin-left: 90%;
+	margin-top: 2%
+}
+
+.alinharCabecalho{
+	margin-left: 2%;
+	margin-top: 2%;
+}
+
+.tabela{
+	width: 100%;
+}
+
+.corBranca{
+	color: white;
+}
+
+.corDeFundo .ui-panel-titlebar{
+	background-color: #99CC32;
+}
+
+.ui-datatable-header{
+	background-color: 99CC32;
+	
+}
+
+.wrap{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+}
+
+
+.panel-buttons{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.painel-dados{
+	width:960px;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+}
+
+.label-form{
+	color: #3383bb;
+	font-weight: bolder;
+	font-size: medium;
+	
+}
+
+.ui-widget-content{
+	border: 1px solid #eeeeee;
+    background: #eeeeee;
+    color: #333333;
+}
