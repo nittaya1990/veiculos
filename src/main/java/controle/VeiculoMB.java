@@ -89,12 +89,6 @@ public class VeiculoMB implements Serializable {
 	public void salvar() { /*Tirar Duvidas sobre isso*/
 		this.veiculo.setValor(new BigDecimal(this.valor));
 		VeiculoDAO.getInstance().salvar(this.veiculo);
-		System.out.println(this.veiculo.getFabricante());
-		System.out.println(this.veiculo.getModelo());
-		System.out.println(this.veiculo.getAnoFabricacao());
-		System.out.println(this.veiculo.getAnoModelo());
-		System.out.println(this.veiculo.getDescricao());
-		System.out.println(this.veiculo.getValor());
 		this.carregarLista();
 		limpar();
 	}
@@ -114,7 +108,9 @@ public class VeiculoMB implements Serializable {
 	}
 	
 	public void alterar() {
-		VeiculoDAO.getInstance().alterar(veiculo);
+		this.veiculo.setValor(new BigDecimal(this.valor));
+
+		VeiculoDAO.getInstance().alterar(this.veiculo);
 		this.limpar();
 		this.carregarLista();
 	}

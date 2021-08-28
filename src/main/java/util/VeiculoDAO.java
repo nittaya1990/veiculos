@@ -54,10 +54,10 @@ public class VeiculoDAO {
 		return entityManager.createQuery("FROM " + EVeiculo.class.getName()).getResultList();
 	}
 	
-	public void alterar(EVeiculo pessoa) {
+	public void alterar(EVeiculo veiculo) {
 		try {
 			entityManager.getTransaction().begin();
-			entityManager.merge(pessoa);
+			entityManager.merge(veiculo);
 			entityManager.getTransaction().commit();
 		} catch (Exception ex) {
 			ex.printStackTrace();

@@ -39,7 +39,7 @@ public class LoginMB implements Serializable {
 	}
 	
 	public void validarLogin() {
-		if(!login.getUsuario().equalsIgnoreCase("andre")) {
+		if(!login.getUsuario().equalsIgnoreCase("marcos")) {
 			oMsg.mensagemUsuarioInexistente();
 			return;
 		}

@@ -37,7 +37,7 @@ public class Grafico implements Serializable{
 		areaModel =  new LineChartModel();
 		
 		LineChartSeries legenda = new LineChartSeries(); // A parte que mostra os dados
-		legenda.setFill(false); //Preenchimento do gráfico
+		legenda.setFill(true); //Preenchimento do gráfico
 		legenda.setLabel("linha de valores"); // Título de valores
 		for(EVeiculo eVeiculo : listaVeiculos) {
 			legenda.set(eVeiculo.getFabricante() + " " + eVeiculo.getModelo(), eVeiculo.getValor()); // Antes da virgula - Eixo X. Após a virgula -  Eixo Y
