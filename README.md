@@ -1,7 +1,13 @@
-# primeiromaven
+# Veículos
+ Pequeno projeto de cadastro de veículos, semelhante a uma loja de veículos.
 
-### Projeto desenvolvido na disciplina de desenvolvimento de softwares baseados em frameworks
+#### CRUD Básico em Java.
 
-* Java
-* Maven
+## Tecnologias
+
+* Java 8
+* MySQL
+* JPA
 * JSF
+* Primefaces
+* Maven
